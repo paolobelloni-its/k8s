@@ -73,16 +73,6 @@ Oppure tutto insieme, dopo aver creato il namespace:
 
 ```bash
 kubectl apply -f namespace.yaml
-```
-
-Verificare che sia stato creato:
-
-```bash
-kubectl get namespace lab  
-```
-
-```bash
-kubectl apply -f namespace.yaml
 kubectl apply -f postgres/ -f api1/ -f api2/ -f nginx/
 ```
 
