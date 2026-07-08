@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: lab
+data:
+  nginx.conf: |
+    events {}
+
+    http {
+
+        upstream backend {
+
+            server api1:8000;
+            server api2:8000;
+
+        }
+
+        server {
+
+            listen 80;
+
+            location / {
+
+                proxy_pass http://backend;
+
+            }
+
+        }
+
+    }

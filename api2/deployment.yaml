@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api2
+  namespace: lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api2
+  template:
+    metadata:
+      labels:
+        app: api2
+    spec:
+      containers:
+        - name: api2
+          image: docker.io/library/postgres-api2:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
