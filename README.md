@@ -1,5 +1,69 @@
 # Laboratorio Kubernetes K3s - PostgreSQL + API1/API2 + NGINX
 
+
+# Prerequisiti - Installazione K3s su Alpine Linux
+
+Questa esercitazione presuppone che gli studenti dispongano già della VM Alpine Linux utilizzata negli esercizi precedenti.
+
+L'obiettivo è installare K3s e utilizzare Kubernetes per eseguire l'applicazione PostgreSQL + API1 + API2 + NGINX.
+
+---
+
+# 1. Aggiornamento del sistema
+
+Aggiornare il sistema operativo Alpine:
+
+```bash
+apk update
+apk upgrade
+```
+
+---
+
+# 2. Installazione prerequisiti
+
+Installare i pacchetti necessari:
+
+```bash
+apk add bash curl iptables
+```
+
+---
+
+# 3. Installazione K3s
+
+Installare K3s utilizzando lo script ufficiale:
+
+```bash
+curl -sfL https://get.k3s.io | sh -
+```
+
+---
+
+# 4. Verifica installazione
+
+Verificare che il cluster Kubernetes sia attivo:
+
+```bash
+kubectl get nodes
+```
+
+Output atteso:
+
+```text
+NAME            STATUS   ROLES           AGE   VERSION
+alpine-slim02   Ready    control-plane   ...   ...
+```
+
+Il nodo deve risultare nello stato:
+
+```text
+Ready
+```
+
+---
+
+
 Questa directory contiene i manifest Kubernetes dell'esercizio derivato dal `docker-compose.yml` originale.
 
 ## Architettura
