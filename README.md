@@ -69,7 +69,19 @@ kubectl apply -f api2/
 kubectl apply -f nginx/
 ```
 
-Oppure tutto insieme, dopo aver creato il namespace:
+Oppure tutto insieme, dopo aver creato il namespace.
+
+Creare il namespace del laboratorio:
+
+```bash
+kubectl apply -f namespace.yaml
+```
+
+Verificare che sia stato creato:
+
+```bash
+kubectl get namespace lab
+```
 
 ```bash
 kubectl apply -f namespace.yaml
