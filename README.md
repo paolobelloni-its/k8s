@@ -78,7 +78,8 @@ kubectl apply -f namespace.yaml
 Verificare che sia stato creato:
 
 ```bash
-kubectl get namespace lab
+kubectl get namespace lab  
+```
 
 ```bash
 kubectl apply -f namespace.yaml
