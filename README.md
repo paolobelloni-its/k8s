@@ -177,7 +177,89 @@ Da browser esterno:
 http://IP_VM:31234
 http://IP_VM:31234/add/mario
 http://IP_VM:31234/lista
+
 ```
+# Self-healing Kubernetes
+
+Uno dei vantaggi principali di Kubernetes è il self-healing.
+
+Se un Pod viene eliminato o va in errore, Kubernetes lo ricrea automaticamente per mantenere lo stato desiderato definito nel Deployment.
+
+## Test pratico
+
+Aprire una finestra di monitoraggio:
+
+```bash
+kubectl get pods -n lab -w
+```
+
+Aprire una seconda console ed eliminare un Pod:
+
+```bash
+kubectl delete pod -n lab NOME_POD
+```
+
+Esempio:
+
+```bash
+kubectl delete pod -n lab nginx-6d8b9d55cb-lfzd6
+```
+
+Oppure:
+
+```bash
+kubectl delete pod -n lab api1-669848bb9c-j2t6n
+```
+
+Nella finestra di monitoraggio si vedrà il Pod passare in stato:
+
+```text
+Terminating
+```
+
+e subito dopo Kubernetes creerà automaticamente un nuovo Pod.
+
+Output tipico:
+
+```text
+nginx-6d8b9d55cb-lfzd6   Terminating
+
+nginx-7c9ff6854c-fz7ml  Pending
+
+nginx-7c9ff6854c-fz7ml  Running
+```
+
+Il nuovo Pod avrà un nome diverso ma svolgerà la stessa funzione del precedente.
+
+## Perché succede?
+
+Il Deployment contiene:
+
+```yaml
+replicas: 1
+```
+
+Kubernetes controlla continuamente che esista una replica attiva.
+
+Se il Pod viene eliminato:
+
+```text
+Pod eliminato
+        ↓
+Replica attive = 0
+        ↓
+Stato desiderato = 1
+        ↓
+Kubernetes crea un nuovo Pod
+```
+
+Questo meccanismo prende il nome di:
+
+```text
+Self-healing
+```
+
+ed è una delle principali differenze tra Kubernetes e Docker eseguito manualmente.
 
 ## Diagnostica
 
